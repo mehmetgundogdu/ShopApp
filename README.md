@@ -1,5 +1,5 @@
 # ShopApp
 
 # Mehmet Gundogdu
-# 02130001043
+# teknogezgin@gmail.com
 # Nesneye Yonelik Yazilim Muhendisligi
