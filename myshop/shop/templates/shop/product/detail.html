@@ -1,0 +1,70 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="product-detail" class="container">
+        <img class="img-thumbnail" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></li>
+                    <li class="active">{{ product.brandmodel.brand.name }} </li>
+                    <li class="active">{{ product.brandmodel.name }} </li>
+                    <li class="active">Information</li>
+
+                </ol>
+        <h2>{{ product.brandmodel.brand.name }} {{ product.brandmodel.name }}</h2>
+        <p class="price" >Price: <mark>${{ product.price }}</mark></p>
+		<form action="{% url 'cart:cart_add' product.id %}" method="post">
+			{{ cart_product_form }}
+			{% csrf_token %}
+			<input type="submit" value="Add to cart">
+		</form>
+    <h3>Product details:</h3>
+        <pre> {{ product.description|linebreaks }} </pre>
+    </div>
+	{% if product.comment_set.all %}
+	<div class="container-fluid"></div>
+		<h2>Comments here:</h2>
+		<div class="text-left">
+			{% for comment in product.comment_set.all %}
+                <div class="panel panel-default">
+                <div class="panel-body">
+                    <p><kbd> {{ comment.user.username }} </kbd> said on <kbd> {{ comment.created_on }} </kbd>  </p>
+</div>
+                <div class="panel-footer"> {{ comment.text }}</div>
+</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% else %}
+        <div class="container-fluid"></div>
+	<h3>No one did not write any comment for this product. Please write a review</h3>
+        </div>
+	{% endif %}
+
+
+	<div class="container" >
+		{% if request.user.is_authenticated %}
+			<h2>Add new comment</h2>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<table>
+					{{ form.as_table }}
+				</table>
+				<input type="submit" name="add" value="Add" />
+			</form>
+		{% else %}
+            <div class="panel panel-default" class="text-center">
+  <div class="panel-body" class="text-center">
+			<p>You have sign in to comment. Please login...</p>
+              </div>
+</div>
+		{% endif %}
+    </div>
+{% endblock %}
+
+        

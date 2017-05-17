@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}
+
+{% block title %}{{ user.get_full_name }}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+<blockquote>
+<p> Dear Mr/Mrs {{ user.get_full_name }}, if you want, you can change your information.</p>
+    <footer> For your order problems, <b>your user id</b> is required. Therefore, you can not change it.</footer>
+</blockquote>
+
+</div>
+
+    <div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Your user details:</h3>
+  </div>
+  <div class="panel-body">
+      <p> <b>Your user id:</b> {{user.id}} </p>
+<p>  <b>Your user name:</b> {{ user.get_full_name }}</p>
+     <p>  <b>Your user e-mail:</b> {{ user.email }}</p>
+  </div>
+
+</div>
+
+
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Do you want to change it?</div>
+
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><a href="{% url "account:edit" %}">Edit profile</a></li>
+    <li class="list-group-item"><a href="{% url "account:password_edit" %}">Edit Password</a></li>
+  </ul>
+</div>
+
+    <div class="profile-info">
+		<ul>
+
+		</ul>
+		<p></p>
+		<p></p>
+    </div>
+{% endblock %}

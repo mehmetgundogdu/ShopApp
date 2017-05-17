@@ -1,0 +1,16 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+<blockquote>
+<h1>Welcome, Mr/Mrs <u>{{ new_user.first_name }} </u> !</h1>
+<footer> Your account has been successfully created. Now you can <a href="{% url "account:login" %}">log in</a>.</footer>
+</blockquote>
+
+</div>
+
+{% endblock %}

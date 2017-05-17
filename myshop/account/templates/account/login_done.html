@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+<blockquote>
+    <h1>Welcome, Mr/Mrs <u> {{ user_login.first_name }} </u> !</h1>
+<footer>You successfully login to this web site. <a href="/">Return to homepage.</a> </footer>
+</blockquote>
+
+</div>
+
+
+{% endblock %}
